@@ -1,0 +1,181 @@
+<div class="container">
+  <div class="border">
+    <button class="btn btn-md btn-outline-primary" (click)="open(content)">
+      <i class="fa fa-user"></i>Nouveau Etudiant</button>
+  </div>
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Prenom</th>
+      <th>Nom</th>
+      <th>Departement</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let etudiant of etudiants">
+      <td><span>{{etudiant.id}}</span></td>
+      <td><span>{{etudiant.prenom}}</span></td>
+      <td><span>{{etudiant.nom}}</span></td>
+      <td><span>{{etudiant.departement}}</span></td>
+      <td><span>{{etudiant.email}}</span></td>
+      <td>
+        <button class="btn btn-sm btn-info" (click)="openDetails(contentDetails, etudiant)">
+          <i class="fa fa-search"></i>Details</button>
+        <button class="btn btn-sm btn-warning" (click)="openEdit(contentEdit, etudiant)">
+          <i class="fa fa-edit"></i>Editer</button>
+        <button class="btn btn-sm btn-danger" (click)="openDelete(contentDelete, etudiant)">
+          <i class="fa fa-remove"></i>Supprimer</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Nouveau Etudiant</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+      <div class="form-group">
+        <label for="prenom">Prenom</label>
+        <div class="input-group">
+          <input id="prenom" name="prenom" class="form-control" ngModel>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <div class="input-group">
+          <input id="nom" name="nom" class="form-control" ngModel>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="departement">Departement</label>
+        <div class="input-group">
+          <input id="departement" name="departement" class="form-control" ngModel>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <div class="input-group">
+          <input id="email" name="email" class="form-control" ngModel>
+        </div>
+      </div>
+      <div class="border text-center">
+        <button data-dismiss="modal" class="btn btn-info">Envoyer</button>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Fermer</button>
+  </div>
+</ng-template>
+<ng-template #contentDetails let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-titlee">Details de l'Etudiant</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label>Prenom</label>
+        <div class="input-group">
+          <input id="prenomm" class="form-control" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Nom</label>
+        <div class="input-group">
+          <input id="nomm" class="form-control" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Departement</label>
+        <div class="input-group">
+          <input id="departementt" class="form-control" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <div class="input-group">
+          <input id="emaill" class="form-control" readonly>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Fermer</button>
+  </div>
+</ng-template>
+<ng-template #contentEdit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-titleee">Editer l'Etudiant</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form  [formGroup]="editForm" novalidate>
+      <div class="form-group">
+        <label>Id</label>
+        <div class="input-group">
+          <input formControlName="id" class="form-control" readonly>
+        </div>
+        <div class="form-group">
+        <label for="prenom">Prenom</label>
+        <div class="input-group">
+          <input formControlName="prenom" class="form-control">
+        </div>
+        </div>
+      <div class="form-group">
+        <label for="nom">Nom</label>
+        <div class="input-group">
+          <input formControlName="nom" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="departement">Departement</label>
+        <div class="input-group">
+          <input formControlName="departement" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <div class="input-group">
+          <input formControlName="email" class="form-control">
+        </div>
+      </div>
+      <div class="border text-center">
+        <button data-dismiss="modal" class="btn btn-info" (click)="onSave()">Enregistrer</button>
+      </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Quitter</button>
+  </div>
+</ng-template>
+<ng-template #contentDelete let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirmer la suppression</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h2>Est ce que vous voulez supprimer cet enregistrement ?</h2>
+    <div class="border text-center">
+      <button data-dismiss="modal" class="btn btn-danger" (click)="onDelete()">Oui, Supprime!</button>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Quitter</button>
+  </div>
+</ng-template>
